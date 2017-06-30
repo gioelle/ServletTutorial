@@ -10,18 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.user.Address;
 import com.user.Student;
 
-
-@WebServlet("/RegistrationServlet")
-public class RegistrationServlet extends HttpServlet {
+/**
+ * Servlet implementation class BmiServlet
+ */
+@WebServlet("/BmiServlet")
+public class BmiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public RegistrationServlet() {
+    public BmiServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -30,24 +32,19 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Student student = new Student();
-		student.setEmail(request.getParameter("email"));
-		student.setFirstName(request.getParameter("firstName"));
-		student.setLastName(request.getParameter("lastName"));
-		student.setPassword(request.getParameter("password"));
-		student.setSchoolName("Claim Academy");
-		Address a = new Address();
-		a.setStreet(request.getParameter("street"));
-		a.setCity(request.getParameter("city"));
-		a.setState(request.getParameter("street"));
-		a.setZipCode(request.getParameter("zipCode"));
-		student.setAddress(a);
+		String weight = request.getParameter("weight");
+		String height = request.getParameter("height");
+		double toMetricKilo = 0.45;
+		double toMetricCm = 0.025;
+		double bmi = (Integer.parseInt(weight)*toMetricKilo)/Math.pow(2, (Integer.parseInt(height)*toMetricCm));
 		
 		HttpSession session = request.getSession(true);
+		Student student = (Student)session.getAttribute("student");
+		student.setBmi(bmi);
 		session.setAttribute("student", student);
-		
 		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
 		rs.forward(request,response);
+		
 	}
 
 	/**
@@ -57,4 +54,5 @@ public class RegistrationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

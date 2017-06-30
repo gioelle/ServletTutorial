@@ -62,11 +62,36 @@ Student student=(Student) session.getAttribute("student");
 						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 				</div>
+				
+					<div class = "container">
+		<!--  Example row of columns -->
+		<div class="row">
+			<div class="col-md-4">
+				<h2>My BMI</h2>
+				<p><% out.print(student.getBmi()); %></p>
+						<!-- 	<p><a class="btn btn-default" href="GpaServlet" role="button"> View GPA </a></p> --> </div>
+					<div class="col-md-4">
+						<h2>Enter Height & Weight</h2>
+						<form action="BmiServlet" method="post">
+						<div class="form-group">
+						<label for="height">Height in Inches</label>
+						<input type="text" class="form-control" name="height" id="height" placeholder="Height">
+					</div>
+					<div class="form-group">
+						<label for="weight">Weight in pounds</label>
+						<input type="text" class="form-control" name="weight" id="weight" placeholder="Weight">
+					</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+					</form>
+				</div>
+		
 				<hr>
 				<footer>
 					<p>&copy; 2017 Company, Inc. </p>
 				</footer>
 			</div> <!-- /container -->
+			
+			
 	</div>
 </body>
 </html>

@@ -6,9 +6,20 @@ public class Student {
 	private String email; 
 	private String schoolName;
 	private String password;
+	private double bmi;
 	private double gpa;
 	private Address address;
 	
+	
+	
+	public double getBmi() {
+		return bmi;
+	}
+
+	public void setBmi(double bmi) {
+		this.bmi = bmi;
+	}
+
 	public Student(){
 		
 	}
