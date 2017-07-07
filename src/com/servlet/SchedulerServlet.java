@@ -2,7 +2,6 @@ package com.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.user.Course;
-import com.user.Student;
 import com.user.WeekDay;
 
 /**
@@ -40,7 +38,40 @@ public class SchedulerServlet extends HttpServlet {
 		String professor = request.getParameter("professor");
 		String[] weekdays = request.getParameterValues("weekday");
 		ArrayList<WeekDay> occurances = null;
+		ArrayList<Course> courses = null;
+		String time = request.getParameter("time");
+		String roomNumber = request.getParameter("roomNumber");
+		String startDate = request.getParameter("startDate");
 		
+		
+		Course course = new Course();
+		course.setCourseName(request.getParameter("courseName"));
+		course.setCourses(weekdayInput(request.getParameter("weekDays-selector")));
+		course.setProfessor(request.getParameter("form-control"));
+		course.setRoomNumber(request.getParameter("roomNumber-selector"));		
+		course.setStartDate(request.getParameter("datepicker"));
+		
+		courses.add(course);
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("courses", courses);
+		
+		RequestDispatcher rs = request.getRequestDispatcher("course.jsp");
+		rs.forward(request,response);
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	public ArrayList<WeekDay> weekdayInput(String[] weekdays) {
+		ArrayList<WeekDay> occurances = new ArrayList<WeekDay>();
 		for(int i = 0; i<weekdays.length; i++) {
 			if(weekdays[i].equals(WeekDay.MONDAY.toString())) {
 				occurances.add(i, WeekDay.MONDAY);
@@ -54,25 +85,6 @@ public class SchedulerServlet extends HttpServlet {
 				occurances.add(i, WeekDay.FRIDAY);
 			}
 		}
-		
-		String time = request.getParameter("time");
-		String roomNumber = request.getParameter("roomNumber");
-		String startDate = request.getParameter("startDate");
-		
-		HttpSession session = request.getSession(true);
-		Course course = (Course)session.getAttribute("course");
-		session.setAttribute("course", course);
-		RequestDispatcher rs = request.getRequestDispatcher("account.jsp");
-		rs.forward(request,response);
-		
+		return occurances;
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

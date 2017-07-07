@@ -88,15 +88,52 @@ color: #ffffff;
 			<input type="checkbox" name="weekday" value="FRIDAY" id="weekday-fri" class="weekday"/>
 			<label for="weekday-mon">F</label>
 		</div>
+		Courses
+		<select class="courseName">
+			<option value="Java"> Java </option>
+			<option value="C#"> C# </option>
+			<option value="C++"> C++ </option>
+			<option value="C"> C </option>
+			<option value="Ruby on Rails"> Ruby on Rails </option>
+			<option value="Php"> Php </option>
+			<option value="SQL"> SQL </option>
+			<option value="JavaScript"> JavaScript </option>			
+		</select>
+		<div class="roomNumber-selector">
+			<input type="text" name="roomNumber" value="roomNumber" id="roomNumber" class="roomNumber"/>
+			<label for="roomNumber">Room Number</label>
+			<input type="text" name="time" value="time" id="time" class="time"/>
+			<label for="time">Time</label>
+		</div>
+		<br>
 		<br>
 		<p>Date:<input type="text" id="datepicker"></p>
 		<button type="button">add course</button>
 	</form>
+	<table class="table table-hover">
+		<c:if test="${courses != null}">
+			<tr>
+				<th>Course Name</th>
+				<th>Start Date</th>
+				<th>Professor</th>
+				<th>Room Number</th>
+				<th>Days of the Week</th>
+				<th>Time</th>
+		<c:forEach var="course" item="courses">
+			<tr>
+				<td><c:out value="${course.courseName}"/></td>
+				<td><c:out value="${course.startDate}"/></td>		
+				<td><c:out value="${course.professor}"/></td>
+				<td><c:out value="${course.roomNumber}"/></td>
+				<td><c:out value="${course.occurances}"/></td>
+				<td><c:out value="${course.time}"/></td>
+			</tr>
+		</c:forEach>
+		</c:if>
+		
+	
+	</table>
 	</div>
 </div>
-
 </body>
-
-
-
 </html>
