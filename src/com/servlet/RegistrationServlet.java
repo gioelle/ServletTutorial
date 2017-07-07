@@ -1,5 +1,7 @@
 package com.servlet;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -42,6 +44,16 @@ public class RegistrationServlet extends HttpServlet {
 		a.setState(request.getParameter("street"));
 		a.setZipCode(request.getParameter("zipCode"));
 		student.setAddress(a);
+		
+		//This is how we save to a file. Put this into a method with two parameters: student & filename.txt to call so you don't have to write it every time.
+		String fileName = "C:\\Users\\Joelle.Fronzaglio\\Documents\\GhostWriter\\student.txt";
+		
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))){
+			bw.write(student.toString());
+			System.out.println("all Good here.");
+		}catch(IOException e) {
+			
+		}
 		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("student", student);

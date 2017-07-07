@@ -15,7 +15,7 @@ import com.user.Student;
 /**
  * Servlet implementation class GpaServlet
  */
-@WebServlet("/GpaServlet")
+@WebServlet("/gpa")
 public class GpaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c"
+	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.user.Student"%>
@@ -46,7 +48,7 @@ Student student=(Student) session.getAttribute("student");
 						<!-- 	<p><a class="btn btn-default" href="GpaServlet" role="button"> View GPA </a></p> --> </div>
 					<div class="col-md-4">
 						<h2>Enter Grades</h2>
-						<form action="GpaServlet" method="post">
+						<form action="gpa" method="post">
 						<div class="form-group">
 						<label for="gradeOne">Grade One</label>
 						<input type="text" class="form-control" name="gradeOne" id="gradeOne" placeholder="Grade One">
