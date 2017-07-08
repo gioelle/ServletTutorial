@@ -7,9 +7,7 @@
 <html lang="en">
 <head>
 <link rel="stylesheet" 
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+	href="./styles/bootstrap.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Courses</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -66,9 +64,9 @@ color: #ffffff;
 	<div style="margin-top: 100px"></div>
 	<div style="width: 300px">
 	<br><br>
-	<form>
+	<form action="SchedulerServlet" method="post">
 		Professors
-		<select class="form-control">
+		<select class="form-control" name="professor">
 			<option value="John White"> John White </option>
 			<option value="Michael Brown"> Michael Brown </option>
 			<option value="Tina Doe"> Tna Doe </option>
@@ -77,19 +75,19 @@ color: #ffffff;
 		</select>
 		<br>
 		<div class="weekDays-selector">
-			<input type="checkbox" name="weekday" value="MONDAY" id="weekday-mon" class="weekday"/>
+			<input type="checkbox" name="weekdays" value="MONDAY" id="weekday-mon" class="weekday"/>
 			<label for="weekday-mon">M</label>
-			<input type="checkbox" name="weekday" value="TUESDAY" id="weekday-tue" class="weekday"/>
-			<label for="weekday-mon">T</label>
-			<input type="checkbox" name="weekday" value="WEDNESDAY" id="weekday-wed" class="weekday"/>
-			<label for="weekday-mon">W</label>
-			<input type="checkbox" name="weekday" value="THURSDAY" id="weekday-thu" class="weekday"/>
-			<label for="weekday-mon">R</label>
-			<input type="checkbox" name="weekday" value="FRIDAY" id="weekday-fri" class="weekday"/>
-			<label for="weekday-mon">F</label>
+			<input type="checkbox" name="weekdays" value="TUESDAY" id="weekday-tue" class="weekday"/>
+			<label for="weekday-tue">T</label>
+			<input type="checkbox" name="weekdays" value="WEDNESDAY" id="weekday-wed" class="weekday"/>
+			<label for="weekday-wed">W</label>
+			<input type="checkbox" name="weekdays" value="THURSDAY" id="weekday-thu" class="weekday"/>
+			<label for="weekday-thu">R</label>
+			<input type="checkbox" name="weekdays" value="FRIDAY" id="weekday-fri" class="weekday"/>
+			<label for="weekday-fri">F</label>
 		</div>
 		Courses
-		<select class="courseName">
+		<select class="courseName" name="courseName">
 			<option value="Java"> Java </option>
 			<option value="C#"> C# </option>
 			<option value="C++"> C++ </option>
@@ -107,11 +105,12 @@ color: #ffffff;
 		</div>
 		<br>
 		<br>
-		<p>Date:<input type="text" id="datepicker"></p>
-		<button type="button">add course</button>
+		<p>Date:<input type="text" name="datepicker" id="datepicker"></p>
+		<button type="submit">add course</button>
 	</form>
+	
+	<c:if test="${courses != null}">
 	<table class="table table-hover">
-		<c:if test="${courses != null}">
 			<tr>
 				<th>Course Name</th>
 				<th>Start Date</th>
@@ -119,7 +118,7 @@ color: #ffffff;
 				<th>Room Number</th>
 				<th>Days of the Week</th>
 				<th>Time</th>
-		<c:forEach var="course" item="courses">
+		<c:forEach var="course" items="${courses}">
 			<tr>
 				<td><c:out value="${course.courseName}"/></td>
 				<td><c:out value="${course.startDate}"/></td>		
@@ -129,10 +128,9 @@ color: #ffffff;
 				<td><c:out value="${course.time}"/></td>
 			</tr>
 		</c:forEach>
-		</c:if>
-		
-	
 	</table>
+	</c:if>
+		
 	</div>
 </div>
 </body>

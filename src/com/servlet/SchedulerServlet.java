@@ -34,22 +34,24 @@ public class SchedulerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String courseName = request.getParameter("courseName");
-		String professor = request.getParameter("professor");
-		String[] weekdays = request.getParameterValues("weekday");
-		ArrayList<WeekDay> occurances = null;
-		ArrayList<Course> courses = null;
-		String time = request.getParameter("time");
-		String roomNumber = request.getParameter("roomNumber");
-		String startDate = request.getParameter("startDate");
-		
+//		String courseName = request.getParameter("courseName");
+//		String professor = request.getParameter("professor");
+	//	String[] weekdays = request.getParameterValues("weekdays");
+//		ArrayList<WeekDay> occurances = new ArrayList<WeekDay>();
+		ArrayList<Course> courses = new ArrayList<Course>();
+//		String time = request.getParameter("time");
+//		String roomNumber = request.getParameter("roomNumber");
+//		String startDate = request.getParameter("startDate");
+//		
 		
 		Course course = new Course();
 		course.setCourseName(request.getParameter("courseName"));
-		course.setCourses(weekdayInput(request.getParameter("weekDays-selector")));
-		course.setProfessor(request.getParameter("form-control"));
-		course.setRoomNumber(request.getParameter("roomNumber-selector"));		
+		course.setOccurances(weekdayInput(request.getParameterValues("weekdays")));
+		course.setProfessor(request.getParameter("professor"));
+		course.setRoomNumber(request.getParameter("roomNumber"));		
 		course.setStartDate(request.getParameter("datepicker"));
+		course.setTime(request.getParameter("time"));
+		
 		
 		courses.add(course);
 		
